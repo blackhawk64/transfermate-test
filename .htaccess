@@ -1,0 +1,20 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+# Deny access to folders via url
+RewriteRule ^(App|Controllers|DataModel|Models|ModelsView|Views)/ - [R=404]
+
+# Deny access to files via url
+RewriteCond %{REQUEST_FILENAME} -f
+  RewriteCond %{REQUEST_URI} \.htaccess|\.json|\.md [NC]
+  RewriteRule ^(.*)$ errorCond
+  #RewriteRule ^(.*)$ index.php [R=404]
+
+<Files settings.php>
+Order allow,deny
+Deny from all
+</Files>
