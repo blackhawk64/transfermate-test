@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <table border="1">
+    <table>
         <tr>
             <td>
                 <form action="<?php echo constant('BASE_URL'); ?>Home/SearchBooks" id="SearchForm">
@@ -69,7 +69,8 @@
                             NewRow.classList.add("NewRecord");
 
                             Author.innerHTML = ResponseFromEndPoint.message[item].author;
-                            Title.innerHTML = ResponseFromEndPoint.message[item].title;
+                            let BookTitle = ResponseFromEndPoint.message[item].title == null ? "no books found" : ResponseFromEndPoint.message[item].title;
+                            Title.innerHTML = BookTitle;
                         }, 1000 * item);
                     }
                 }

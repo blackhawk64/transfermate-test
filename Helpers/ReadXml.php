@@ -9,14 +9,15 @@ class ReadXml
         if ($file->isFile() && strcmp(strtolower($file->getExtension()), "xml") == 0) {
             $xmlContent = simplexml_load_file($file);
 
-            if ($xmlContent === false) {
+            if ($xmlContent == false) {
                 $fileContent = file_get_contents($file);
                 $xmlContent = simplexml_load_string("<books>{$fileContent}</books>");
             }
 
             $finalContent = (array)$xmlContent;
         }
-
+        
+        libxml_clear_errors();
         return $finalContent;
     }
 }

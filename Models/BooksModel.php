@@ -69,12 +69,17 @@ class BooksModel
     public function UpdateBook($title, $id, $author)
     {
         try {
+            $IfAuthorWouldBeUpdated = $id != -1 ? ",author_fk = :author" : "";
+            
             $query = $this->db->prepare("UPDATE books SET
                                                 title = :title
-                                                ,author_fk = :author
+                                                {$IfAuthorWouldBeUpdated}
                                         WHERE id = :id");
             $query->bindParam(':title', $title, PDO::PARAM_STR, 100);
-            $query->bindParam(':author', $author, PDO::PARAM_INT);
+            if ($id != -1) {
+                $query->bindParam(':author', $author, PDO::PARAM_INT);
+            }
+            
             $query->bindParam(':id', $id, PDO::PARAM_INT);
 
             return $query->execute();
