@@ -34,8 +34,8 @@ class AppStartup
                     }
                     else
                     {
-                        #$controller = new Controllers\ErrorController;
-                        #$controller->Index("404", "página no encontrada", "Parece que la página que intentas buscar no se encuentra.");
+                        $controller = new HomeController();
+                        $controller->Error();
                     }
                 }
                 else
@@ -45,13 +45,14 @@ class AppStartup
             }
             else
             {
-                #$controller = new Controllers\ErrorController;
-                #$controller->Index("404", "página no encontrada", "Parece que la página que intentas buscar no se encuentra.");
+                $controller = new HomeController();
+                $controller->Error();
             }
         }
         else
         {
-            #header('Location: '. constant('BASE_URL') .'Error/');
+            $controller = new HomeController();
+            $controller->Error();
         }
     }
 }

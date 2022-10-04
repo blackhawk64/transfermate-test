@@ -3,7 +3,7 @@
 class Database
 {
     private const HOST = "localhost";
-    private const DATABASE = "books";
+    private const DATABASE = "bookscatalog";
     private const USER = "postgres";
     private const PASSWORD = "pssql";
 
